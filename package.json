@@ -1,0 +1,11 @@
+{
+  "name": "m4miniprojeto",
+  "version": "1.0.0",
+  "description": "Mini Projeto Modulo 4 PDA",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
