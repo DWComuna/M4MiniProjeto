@@ -1,0 +1,26 @@
+{
+    "janeiro": {
+        "aluguel": 600,
+        "agua": 200,
+        "luz": 200,
+        "internet": 300,
+        "salarios": 3000 
+    },
+    
+    "fevereiro": {
+        "aluguel": 600,
+        "agua": 200,
+        "luz": 200,
+        "internet": 300,
+        "salarios": 3000 
+    },
+
+    "marco": {
+        "aluguel": 600,
+        "agua": 200,
+        "luz": 200,
+        "internet": 300,
+        "salarios": 3000 
+    }
+
+}
