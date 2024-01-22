@@ -1,7 +1,8 @@
-const http = require('http')
 const express = require('express');
 const debug = require('debug')('nodestr:server');
 const server = express();
+const fs = require('fs');
+const path = require('path');
 
 server.get('/', (req, res) => {
     return res.json({mensagem: 'API Ok'})
@@ -17,16 +18,38 @@ server.get ('/dados-gerais', (req, res) => {
 
 function obterGastosMensais () {
 
-    return {
-        janeiro: 500,
-        fevereiro: 600,
-        marco: 400
-    }
+   const caminhoArquivo = path.join(__dirname, 'src/data/gastos.json');
+
+   try {
+    const conteudo = fs.readFileSync(caminhoArquivo, 'utf-8');
+    const dadosGastos = JSON.parse(conteudo);
+    return dadosGastos;
+   } catch (error) {
+    console.error('Erro na leitura de dados', error.message);
+    return{};
+   }
+
 };
+
+function obterLucrosMensais () {
+
+    const caminhoArquivo = path.join(__dirname, 'src/data/lucros.json');
+ 
+    try {
+     const conteudo = fs.readFileSync(caminhoArquivo, 'utf-8');
+     const dadosGastos = JSON.parse(conteudo);
+     return dadosGastos;
+    } catch (error) {
+     console.error('Erro na leitura de dados', error.message);
+     return{};
+    }
+ 
+ };
+ 
 
 // GET Gastos Mensais
 server.get ('/gastos-mensais', (req, res) => {
-    
+
     const gastosMensais = obterGastosMensais();
 
     return res.json({ gastosMensais });
@@ -36,7 +59,9 @@ server.get ('/gastos-mensais', (req, res) => {
 
 //GET  Lucros Mensais
 server.get ('/lucros-mensais', (req, res) => {
+    const lucrosMensais = obterLucrosMensais();
 
+    return res.json({ lucrosMensais });
 });
 
 /********************************/
