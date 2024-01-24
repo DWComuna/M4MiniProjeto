@@ -8,21 +8,13 @@ server.get('/', (req, res) => {
     return res.json({mensagem: 'API Ok'})
 });
 
-// GET Dados Gerais
-
-server.get ('/dados-gerais', (req, res) => {
-
-});
-
-/*********************************/
-
 function obterGastosMensais () {
 
    const caminhoArquivo = path.join(__dirname, 'src/data/gastos.json');
 
    try {
     const conteudo = fs.readFileSync(caminhoArquivo, 'utf-8');
-    const dadosGastos = JSON.parse(conteudo);
+    var dadosGastos = JSON.parse(conteudo);
     return dadosGastos;
    } catch (error) {
     console.error('Erro na leitura de dados', error.message);
@@ -37,15 +29,27 @@ function obterLucrosMensais () {
  
     try {
      const conteudo = fs.readFileSync(caminhoArquivo, 'utf-8');
-     const dadosGastos = JSON.parse(conteudo);
-     return dadosGastos;
+     var dadosLucros = JSON.parse(conteudo);
+     return dadosLucros;
     } catch (error) {
      console.error('Erro na leitura de dados', error.message);
      return{};
     }
  
  };
- 
+
+ function calcularDesempenho () {
+    const caminhoArquivo = path.join(__dirname, 'src/data/lucros.json');
+
+ };
+
+ // GET Dados Gerais
+
+server.get ('/dados-gerais', (req, res) => {
+
+});
+
+/*********************************/
 
 // GET Gastos Mensais
 server.get ('/gastos-mensais', (req, res) => {
@@ -68,7 +72,9 @@ server.get ('/lucros-mensais', (req, res) => {
 
 //GET Desempenho
 server.get ('/desempenho', (req, res) => {
+    const Desempenho = calcularDesempenho();
 
+    return res.json({Desempenho});
 });
 
 /*******************************/
