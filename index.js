@@ -67,7 +67,7 @@ function gastosMensais() {
         console.error('Erro na leitura de dados', error.message);
         return {};
     }
-}
+};
 
 function calcularDesempenho() {
     const gastos = gastosMensais();
@@ -90,11 +90,11 @@ function calcularDesempenho() {
                 lucro: lucroMensal,
                 margemLucro: margemLucroMensal
             };
-        }
+        };
     });
 
     return desempenho;
-}
+};
 
 
 // GET Dados Gerais
@@ -125,7 +125,6 @@ server.get('/lucros-mensais', (req, res) => {
 /********************************/
 
 //GET Desempenho
-// GET Desempenho (Margem de Lucro)
 server.get('/desempenho', (req, res) => {
     const desempenhoMensal = calcularDesempenho();
 
@@ -141,4 +140,4 @@ server.get('/desempenho', (req, res) => {
 
 server.listen(3000, () => {
     console.log("Servidor Ok")
-})
+});
