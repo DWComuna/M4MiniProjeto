@@ -4,15 +4,17 @@
         "agua": 200,
         "luz": 200,
         "internet": 300,
-        "salarios": 3000 
+        "salarios": 3000,
+        "gastos": 0
     },
     
     "fevereiro": {
         "aluguel": 600,
-        "agua": 200,
+        "agua": 400,
         "luz": 200,
         "internet": 300,
-        "salarios": 3000 
+        "salarios": 3000,
+        "gastos": 0
     },
 
     "marco": {
@@ -20,7 +22,8 @@
         "agua": 200,
         "luz": 200,
         "internet": 300,
-        "salarios": 3000 
+        "salarios": 5000,
+        "gastos": 0
     }
 
 }
