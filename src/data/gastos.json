@@ -24,6 +24,89 @@
         "internet": 300,
         "salarios": 5000,
         "gastos": 0
+    },
+
+    "abril": {
+        "aluguel": 600,
+        "agua": 200,
+        "luz": 200,
+        "internet": 300,
+        "salarios": 5000,
+        "gastos": 0
+    },
+
+    "maio": {
+        "aluguel": 600,
+        "agua": 200,
+        "luz": 200,
+        "internet": 300,
+        "salarios": 5000,
+        "gastos": 0
+    },
+
+    "junho": {
+        "aluguel": 600,
+        "agua": 200,
+        "luz": 200,
+        "internet": 300,
+        "salarios": 5000,
+        "gastos": 0
+    },
+
+    "julho": {
+        "aluguel": 600,
+        "agua": 200,
+        "luz": 200,
+        "internet": 300,
+        "salarios": 5000,
+        "gastos": 0
+    },
+
+    "agosto": {
+        "aluguel": 600,
+        "agua": 200,
+        "luz": 200,
+        "internet": 300,
+        "salarios": 5000,
+        "gastos": 0
+    },
+
+    "setembro": {
+        "aluguel": 600,
+        "agua": 200,
+        "luz": 200,
+        "internet": 300,
+        "salarios": 5000,
+        "gastos": 0
+    },
+
+    "outubro": {
+        "aluguel": 600,
+        "agua": 200,
+        "luz": 200,
+        "internet": 300,
+        "salarios": 5000,
+        "gastos": 0
+    },
+
+    "novembro": {
+        "aluguel": 600,
+        "agua": 200,
+        "luz": 200,
+        "internet": 300,
+        "salarios": 5000,
+        "gastos": 0
+    },
+
+    "dezembro": {
+        "aluguel": 600,
+        "agua": 200,
+        "luz": 200,
+        "internet": 300,
+        "salarios": 5000,
+        "gastos": 0
     }
+
+
 
 }
