@@ -4,8 +4,8 @@
         "agua": 200,
         "luz": 200,
         "internet": 300,
-        "salarios": 3000,
-        "gastos": 0
+        "salarios": 3000
+        
     },
     
     "fevereiro": {
@@ -13,8 +13,8 @@
         "agua": 400,
         "luz": 200,
         "internet": 300,
-        "salarios": 3000,
-        "gastos": 0
+        "salarios": 3000
+       
     },
 
     "marco": {
@@ -22,8 +22,7 @@
         "agua": 200,
         "luz": 200,
         "internet": 300,
-        "salarios": 5000,
-        "gastos": 0
+        "salarios": 5000
     },
 
     "abril": {
@@ -31,8 +30,7 @@
         "agua": 200,
         "luz": 200,
         "internet": 300,
-        "salarios": 5000,
-        "gastos": 0
+        "salarios": 5000
     },
 
     "maio": {
@@ -40,8 +38,7 @@
         "agua": 200,
         "luz": 200,
         "internet": 300,
-        "salarios": 5000,
-        "gastos": 0
+        "salarios": 5000
     },
 
     "junho": {
@@ -49,8 +46,7 @@
         "agua": 200,
         "luz": 200,
         "internet": 300,
-        "salarios": 5000,
-        "gastos": 0
+        "salarios": 5000
     },
 
     "julho": {
@@ -58,8 +54,7 @@
         "agua": 200,
         "luz": 200,
         "internet": 300,
-        "salarios": 5000,
-        "gastos": 0
+        "salarios": 5000
     },
 
     "agosto": {
@@ -67,8 +62,7 @@
         "agua": 200,
         "luz": 200,
         "internet": 300,
-        "salarios": 5000,
-        "gastos": 0
+        "salarios": 5000
     },
 
     "setembro": {
@@ -76,8 +70,7 @@
         "agua": 200,
         "luz": 200,
         "internet": 300,
-        "salarios": 5000,
-        "gastos": 0
+        "salarios": 5000
     },
 
     "outubro": {
@@ -85,8 +78,7 @@
         "agua": 200,
         "luz": 200,
         "internet": 300,
-        "salarios": 5000,
-        "gastos": 0
+        "salarios": 5000
     },
 
     "novembro": {
@@ -94,8 +86,7 @@
         "agua": 200,
         "luz": 200,
         "internet": 300,
-        "salarios": 5000,
-        "gastos": 0
+        "salarios": 5000
     },
 
     "dezembro": {
@@ -103,8 +94,7 @@
         "agua": 200,
         "luz": 200,
         "internet": 300,
-        "salarios": 5000,
-        "gastos": 0
+        "salarios": 5000
     }
 
 
