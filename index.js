@@ -51,18 +51,26 @@ function gastosMensais() {
             meses.forEach((mes) => {
                 if (mes !== 'gastos') {
                     valores[mes].gastos = Object.values(valores[mes]).reduce((total, valor) => {
-                        // Certifique-se de somar apenas os valores numéricos
                         return typeof valor === 'number' ? total + valor : total;
                     }, 0);
                 }
             });
 
-            return valores;
+            // Filtra os meses que têm gasto maior que zero
+            const mesesComGastos = meses.filter((mes) => valores[mes].gastos > 0);
+
+            // Cria um novo objeto com apenas os meses que têm gastos
+            const valoresComGastos = mesesComGastos.reduce((obj, mes) => {
+                obj[mes] = valores[mes];
+                return obj;
+            }, {});
+
+            return valoresComGastos;
         }
 
-        const gastosComSoma = somarValoresMensais(dadosGastos);
+        const gastosSomados = somarValoresMensais(dadosGastos);
 
-        return gastosComSoma;
+        return gastosSomados;
     } catch (error) {
         console.error('Erro na leitura de dados', error.message);
         return {};
@@ -78,17 +86,15 @@ function calcularDesempenho() {
 
     meses.forEach((mes) => {
         if (lucros[mes]) {
-            // Certifique-se de que os valores são numéricos
             const gastosMensais = typeof gastos[mes].gastos === 'number' ? gastos[mes].gastos : 0;
             const lucroMensal = typeof lucros[mes] === 'number' ? lucros[mes] : 0;
 
-            // Calcular a margem de lucro para cada mês
             const margemLucroMensal = (lucroMensal / gastosMensais) * 100;
 
             desempenho[mes] = {
                 gastos: gastosMensais,
                 lucro: lucroMensal,
-                margemLucro: margemLucroMensal
+                margemLucro: margemLucroMensal,
             };
         };
     });
@@ -96,11 +102,57 @@ function calcularDesempenho() {
     return desempenho;
 };
 
+function obterDadosGerais() {
+    const desempenho = calcularDesempenho();
+    const trimestres = ["1º trimestre", "2º trimestre", "3º trimestre", "4º trimestre"];
+    const lucrosTrimestrais = {};
+
+    trimestres.forEach((trimestre, index) => {
+        const mesInicial = index * 3;
+        const mesFinal = mesInicial + 2;
+
+        let lucroTrimestral = 0;
+
+        for (let i = mesInicial; i <= mesFinal; i++) {
+            const mes = Object.keys(desempenho)[i];
+            if (mes && desempenho[mes]) {
+                lucroTrimestral += desempenho[mes].lucro || 0;
+            }
+        }
+
+        lucrosTrimestrais[trimestre] = lucroTrimestral.toFixed(2);
+    });
+
+    // Inicializa o "Lucro Trimestral" como um número
+    const caminhoArquivo = path.join(__dirname, 'src/data/data.json');
+    const conteudoAtual = fs.readFileSync(caminhoArquivo, 'utf-8');
+    const dados = JSON.parse(conteudoAtual);
+
+    dados["Lucro Trimestral"] = 0; // Inicializa como um número
+
+    trimestres.forEach((trimestre) => {
+        dados["Lucro Trimestral"] += parseFloat(lucrosTrimestrais[trimestre]) || 0;
+    });
+
+    // Ajusta para 2 números após a vírgula
+    dados["Lucro Trimestral"] = dados["Lucro Trimestral"].toFixed(2);
+
+    fs.writeFileSync(caminhoArquivo, JSON.stringify(dados, null, 2), 'utf-8');
+
+    return lucrosTrimestrais;
+};
 
 // GET Dados Gerais
 
 server.get('/dados-gerais', (req, res) => {
+    const lucrosTrimestrais = obterDadosGerais();
+    const caminhoArquivo = path.join(__dirname, 'src/data/data.json');
+    const conteudoAtual = fs.readFileSync(caminhoArquivo, 'utf-8');
+    const dados = JSON.parse(conteudoAtual);
+    dados["Capital Investido"] = dados["Capital Investido"].toFixed(2);
+    dados["Lucro Trimestral"] = lucrosTrimestrais;
 
+    return res.json({ DadosGerais: dados });
 });
 
 /*********************************/
@@ -128,7 +180,7 @@ server.get('/lucros-mensais', (req, res) => {
 server.get('/desempenho', (req, res) => {
     const desempenhoMensal = calcularDesempenho();
 
-    // Formatar a margem de lucro de cada mês
+    
     Object.keys(desempenhoMensal).forEach((mes) => {
         desempenhoMensal[mes].margemLucro = desempenhoMensal[mes].margemLucro.toFixed(1) + '%';
     });
@@ -138,6 +190,6 @@ server.get('/desempenho', (req, res) => {
 
 /*******************************/
 
-server.listen(3000, () => {
+server.listen(2469, () => {
     console.log("Servidor Ok")
 });
