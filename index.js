@@ -1,10 +1,9 @@
 const express = require('express');
-const debug = require('debug')('nodestr:server');
 const server = express();
 const fs = require('fs');
 const path = require('path');
 
-server.get('/', (req, res) => {
+server.get('/', (res) => {
     return res.json({ mensagem: 'API Ok' })
 });
 
@@ -56,10 +55,8 @@ function gastosMensais() {
                 }
             });
 
-            // Filtra os meses que têm gasto maior que zero
             const mesesComGastos = meses.filter((mes) => valores[mes].gastos > 0);
 
-            // Cria um novo objeto com apenas os meses que têm gastos
             const valoresComGastos = mesesComGastos.reduce((obj, mes) => {
                 obj[mes] = valores[mes];
                 return obj;
@@ -118,23 +115,21 @@ function obterDadosGerais() {
             if (mes && desempenho[mes]) {
                 lucroTrimestral += desempenho[mes].lucro || 0;
             }
-        }
+        };
 
         lucrosTrimestrais[trimestre] = lucroTrimestral.toFixed(2);
     });
 
-    // Inicializa o "Lucro Trimestral" como um número
     const caminhoArquivo = path.join(__dirname, 'src/data/data.json');
     const conteudoAtual = fs.readFileSync(caminhoArquivo, 'utf-8');
     const dados = JSON.parse(conteudoAtual);
 
-    dados["Lucro Trimestral"] = 0; // Inicializa como um número
+    dados["Lucro Trimestral"] = 0;
 
     trimestres.forEach((trimestre) => {
         dados["Lucro Trimestral"] += parseFloat(lucrosTrimestrais[trimestre]) || 0;
     });
 
-    // Ajusta para 2 números após a vírgula
     dados["Lucro Trimestral"] = dados["Lucro Trimestral"].toFixed(2);
 
     fs.writeFileSync(caminhoArquivo, JSON.stringify(dados, null, 2), 'utf-8');
@@ -180,7 +175,7 @@ server.get('/lucros-mensais', (req, res) => {
 server.get('/desempenho', (req, res) => {
     const desempenhoMensal = calcularDesempenho();
 
-    
+
     Object.keys(desempenhoMensal).forEach((mes) => {
         desempenhoMensal[mes].margemLucro = desempenhoMensal[mes].margemLucro.toFixed(1) + '%';
     });
@@ -190,6 +185,6 @@ server.get('/desempenho', (req, res) => {
 
 /*******************************/
 
-server.listen(2469, () => {
+server.listen(3000, () => {
     console.log("Servidor Ok")
 });
