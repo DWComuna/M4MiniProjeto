@@ -55,10 +55,10 @@ function gastosMensais() {
                 }
             });
 
-            const mesesComGastos = meses.filter((mes) => valores[mes].gastos > 0);
-
-            const valoresComGastos = mesesComGastos.reduce((obj, mes) => {
-                obj[mes] = valores[mes];
+            const valoresComGastos = Object.keys(valores).reduce((obj, mes) => {
+                if (valores[mes].gastos > 0) {
+                    obj[mes] = valores[mes];
+                }
                 return obj;
             }, {});
 
@@ -137,36 +137,46 @@ function obterDadosGerais() {
     return lucrosTrimestrais;
 };
 
+
 // GET Dados Gerais
-
 server.get('/dados-gerais', (req, res) => {
-    const lucrosTrimestrais = obterDadosGerais();
-    const caminhoArquivo = path.join(__dirname, 'src/data/data.json');
-    const conteudoAtual = fs.readFileSync(caminhoArquivo, 'utf-8');
-    const dados = JSON.parse(conteudoAtual);
-    dados["Capital Investido"] = dados["Capital Investido"].toFixed(2);
-    dados["Lucro Trimestral"] = lucrosTrimestrais;
+    try {
+        const lucrosTrimestrais = obterDadosGerais();
+        const caminhoArquivo = path.join(__dirname, 'src/data/data.json');
+        const conteudoAtual = fs.readFileSync(caminhoArquivo, 'utf-8');
+        const dados = JSON.parse(conteudoAtual);
+        dados["Capital Investido"] = dados["Capital Investido"].toFixed(2);
+        dados["Lucro Trimestral"] = lucrosTrimestrais;
 
-    return res.json({ DadosGerais: dados });
+        return res.json({ DadosGerais: dados });
+    } catch (error) {
+        console.error('Erro ao obter dados gerais', error.message);
+        return res.status(500).json({ erro: 'Erro interno do servidor' });
+    }
 });
-
-/*********************************/
 
 // GET Gastos Mensais
 server.get('/gastos-mensais', (req, res) => {
-
-    const gastosMensais = obterGastosMensais();
-
-    return res.json({ gastosMensais });
+    try {
+        const gastosMensais = obterGastosMensais();
+        return res.json({ gastosMensais });
+    } catch (error) {
+        console.error('Erro ao obter gastos mensais', error.message);
+        return res.status(500).json({ erro: 'Erro interno do servidor' });
+    }
 });
 
 /********************************/
 
-//GET  Lucros Mensais
+// GET Lucros Mensais
 server.get('/lucros-mensais', (req, res) => {
-    const lucrosMensais = obterLucrosMensais();
-
-    return res.json({ lucrosMensais });
+    try {
+        const lucrosMensais = obterLucrosMensais();
+        return res.json({ lucrosMensais });
+    } catch (error) {
+        console.error('Erro ao obter lucros mensais', error.message);
+        return res.status(500).json({ erro: 'Erro interno do servidor' });
+    }
 });
 
 /********************************/
