@@ -4,7 +4,7 @@ Para visualizar o código em ação:
 Abra o terminal no seu editor de código.
 
 Digite o seguinte comando para iniciar o servidor:
-npm start
+**npm start**
 
 Em seguida, abra seu navegador e acesse:
 
