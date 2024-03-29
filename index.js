@@ -5,7 +5,7 @@ const path = require('path');
 const cors = require('cors');
 
 
-app.use(cors());
+server.use(cors());
 
 server.get('/', (req, res) => {
     return res.json({ mensagem: 'API Ok' })
