@@ -2,8 +2,12 @@ const express = require('express');
 const server = express();
 const fs = require('fs');
 const path = require('path');
+const cors = require('cors');
 
-server.get('/', (res) => {
+
+app.use(cors());
+
+server.get('/', (req, res) => {
     return res.json({ mensagem: 'API Ok' })
 });
 
